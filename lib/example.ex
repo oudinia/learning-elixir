@@ -13,26 +13,31 @@ defmodule Example do
 
   """
   def time_feature do
-    time = ~U[2025-01-01 00:00:00Z]
+    memberships = {:bronze, :silver}
+    memberships = Tuple.append(memberships, :gold)
+    IO.inspect(memberships)
 
-    now =  DateTime.utc_now()
+    prices = {5, 10, 25}
+    sum = Tuple.sum(prices)
+    avg = sum / tuple_size(prices)
+    IO.puts(sum)
+    IO.puts(avg)
 
-    time_till = DateTime.diff(time, now)
+    IO.puts("Average price for #{elem(memberships, 1)} is #{elem(prices, 0)}")
+    users = [
+      {"Oussama", :gold},
+      {"Salma", :gold},
+      {"Mom", :gold},
+    ]
 
-    days = div(time_till, 86_400)
+    Enum.each(users, fn {name, membership} ->
+      IO.puts("#{name} has a #{membership} membership.")
+    end)
 
-    IO.puts(time_till)
-    IO.puts(days)
 
-    hours = div(rem(time_till, 86_400), 60 * 60)
-    IO.puts(hours)
-
-    mins = div(rem(time_till, 60 * 60), 60)
-    IO.puts(mins)
-
-    seconds = rem(time_till, 60)
-    IO.puts(seconds)
-
+    user1 = {"Oussama", :gold}
+    {name, membership} = user1
+    IO.puts("#{name} has a #{membership} membership")
   end
 
   def main do
