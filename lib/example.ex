@@ -13,25 +13,30 @@ defmodule Example do
 
   """
   def time_feature do
-    time = ~U[2025-01-01 00:00:00Z]
+    memberships = %{
+      gold: :gold,
+      silver: :silver,
+      bronze: :bronze,
+      none: :none
+    }
 
-    now =  DateTime.utc_now()
+    prices = %{
+      gold: 25,
+      silver: 20,
+      bronze: 15,
+      none: 0
+    }
 
-    time_till = DateTime.diff(time, now)
+    users = [
+      {"Oussama", memberships.gold},
+      {"Salma", memberships.silver},
+      {"Siham", memberships.gold},
+      {"Mehdi", memberships.silver}
+    ]
 
-    days = div(time_till, 86_400)
-
-    IO.puts(time_till)
-    IO.puts(days)
-
-    hours = div(rem(time_till, 86_400), 60 * 60)
-    IO.puts(hours)
-
-    mins = div(rem(time_till, 60 * 60), 60)
-    IO.puts(mins)
-
-    seconds = rem(time_till, 60)
-    IO.puts(seconds)
+    Enum.each(users, fn {name, membership} ->
+      IO.puts("#{name} has a #{membership} membership paying #{prices[membership]}")
+    end)
 
   end
 
