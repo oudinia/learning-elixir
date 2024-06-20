@@ -12,12 +12,14 @@ defmodule Example do
       :world
 
   """
-  def hello do
+  def main do
     IO.puts(Float.ceil(1.5))
     IO.puts(Integer.gcd(20, 10))
+
+
     :world
   end
 end
 
 
-Example.hello()
+Example.main()
