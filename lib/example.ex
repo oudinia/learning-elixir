@@ -13,18 +13,30 @@ defmodule Example do
 
   """
   def time_feature do
-    time = Time.new!(16, 30, 0, 0)
-    date = Date.new!(2025, 1, 1)
-    date_time = DateTime.new!(date, time, "Etc/UTC")
-    IO.inspect(date_time)
+    time = ~U[2025-01-01 00:00:00Z]
+
+    now =  DateTime.utc_now()
+
+    time_till = DateTime.diff(time, now)
+
+    days = div(time_till, 86_400)
+
+    IO.puts(time_till)
+    IO.puts(days)
+
+    hours = div(rem(time_till, 86_400), 60 * 60)
+    IO.puts(hours)
+
+    mins = div(rem(time_till, 60 * 60), 60)
+    IO.puts(mins)
+
+    seconds = rem(time_till, 60)
+    IO.puts(seconds)
+
   end
 
   def main do
-    IO.puts(Float.ceil(1.5))
-    IO.puts(Integer.gcd(20, 10))
-
-
-    :world
+    IO.puts(:main)
   end
 end
 
